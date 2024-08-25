@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Filter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="api-input">
+            <label for="apiData">API Input</label>
+            <textarea id="apiData" rows="2" readonly>
+{"data":["M","1","334","4","B"]}
+            </textarea>
+        </div>
+        <button id="submitBtn">Submit</button>
+
+        <div class="multi-filter">
+            <label for="filter">Multi Filter</label>
+            <select id="filter" multiple>
+                <option value="numbers" selected>Numbers</option>
+                <!-- Add more options here if needed -->
+            </select>
+        </div>
+
+        <div class="response">
+            <h3>Filtered Response</h3>
+            <p id="filteredResponse">Numbers:</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function () {
+            const apiData = JSON.parse(document.getElementById('apiData').value);
+            const filter = document.getElementById('filter').value;
+            const numbers = apiData.data.filter(item => !isNaN(item));
+
+            let responseText = 'Numbers: ' + numbers.join(',');
+            document.getElementById('filteredResponse').textContent = responseText;
+        });
+
+    </script>
+</body>
+
+</html>
